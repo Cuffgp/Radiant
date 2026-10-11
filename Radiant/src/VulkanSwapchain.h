@@ -23,15 +23,18 @@ namespace Radiant {
 
 		static inline VkFormat s_SwapchainImageFormat;
 		static inline VkFormat s_SwapchainDepthFormat;
+
+		void RecreateSwapchain();
+
 	private:
 		void CreateSwapchain();
 		void CreateImages();
-
 		void CleanupSwapchain();
 
 	private:
 		VkSurfaceKHR m_Surface;
 		VkSwapchainKHR m_Swapchain;
+		VkSwapchainKHR m_OldSwapchain = nullptr;
 
 		VkFormat m_ImageFormat;
 		VkPresentModeKHR m_PresentMode;

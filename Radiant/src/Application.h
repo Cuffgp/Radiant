@@ -18,6 +18,7 @@ namespace Radiant {
 		Window& GetWindow() { return *m_Window; }
 		static Application& Get() { return *s_Application; }
 
+		void OnWindowResize(uint32_t width, uint32_t height);
 	private:
 		inline static Application* s_Application;
 		Scope<Window> m_Window;

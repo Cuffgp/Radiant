@@ -16,6 +16,7 @@ namespace Radiant {
 		void EndSwapchainRendering();
 		void EndFrame();
 
+		void OnWindowResize(uint32_t width, uint32_t height);
 		uint32_t CurrentFrame() { return m_CurrentFrameIndex; }
 
 	public:

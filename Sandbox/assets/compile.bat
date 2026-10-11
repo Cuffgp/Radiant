@@ -1,1 +1,1 @@
-C:/dev/slang-2026.19/bin/slangc.exe simple_shader.slang -target spirv -profile spirv_1_4 -emit-spirv-directly -fvk-use-entrypoint-name -entry vertMain -entry fragMain -o simple_shader.spv
+C:/dev/slang-2026.19/bin/slangc.exe simple_shader.slang -target spirv -reflection-json simple_reflection.json -profile spirv_1_4 -emit-spirv-directly -fvk-use-entrypoint-name -entry vertMain -entry fragMain -o simple_shader.spv

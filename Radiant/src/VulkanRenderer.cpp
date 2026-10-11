@@ -270,4 +270,9 @@ namespace Radiant {
 		m_CurrentFrameIndex = (m_CurrentFrameIndex + 1) % VulkanRenderer::MaxFramesInFlight;
 	}
 
+	void VulkanRenderer::OnWindowResize(uint32_t width, uint32_t height)
+	{
+		m_Swapchain->RecreateSwapchain();
+	}
+
 }

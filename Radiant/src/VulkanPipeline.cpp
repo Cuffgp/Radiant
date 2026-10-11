@@ -7,7 +7,7 @@
 namespace Radiant {
 
 
-	static std::vector<char> readFile(const std::string& filename) 
+	static std::vector<char> readFile(const std::string& filename)
 	{
 		std::ifstream file(filename, std::ios::ate | std::ios::binary);
 
@@ -27,7 +27,8 @@ namespace Radiant {
 		return buffer;
 	}
 
-	VulkanPipeline::VulkanPipeline(const std::string filepath)
+	VulkanPipeline::VulkanPipeline(const std::string filepath):
+		m_Filepath(filepath)
 	{
 		CreatePipelineLayout();
 		CreatePipeline();
@@ -67,7 +68,7 @@ namespace Radiant {
 
 		// Load shader
 
-		auto shaderCode = readFile("assets/simple_shader.spv");
+		auto shaderCode = readFile(m_Filepath);
 
 		VkShaderModuleCreateInfo createInfo{};
 		createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;

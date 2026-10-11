@@ -10,8 +10,10 @@ namespace Radiant {
 		s_Application = this;
 
 		m_Window = CreateScope<Window>();
+		m_Window->SetResizeCallback(RD_BIND_FN(Application::OnWindowResize));
+
 		m_Renderer = CreateScope<VulkanRenderer>();
-		m_Pipeline = CreateScope<VulkanPipeline>("Path");
+		m_Pipeline = CreateScope<VulkanPipeline>("assets/simple_shader.spv");
 
 		std::println("Current Path: {}", std::filesystem::current_path().string());
 	}
@@ -37,5 +39,11 @@ namespace Radiant {
 			m_Renderer->EndFrame();
 			//std::println("Frame Finished");
 		}
+	}
+
+	void Application::OnWindowResize(uint32_t width, uint32_t height)
+	{
+		//std::println("Window resized to {}x{}", width, height);
+		m_Renderer->OnWindowResize(width, height);
 	}
 }
