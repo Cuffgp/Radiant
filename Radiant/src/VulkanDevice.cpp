@@ -42,6 +42,7 @@ namespace Radiant {
 
 	VulkanDevice::~VulkanDevice()
 	{
+		vkDestroyCommandPool(m_Device, m_CommandPool, nullptr);
 		vkDestroyDevice(m_Device, nullptr);
 		if (m_Validation)
 		{

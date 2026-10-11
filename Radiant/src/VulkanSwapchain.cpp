@@ -19,8 +19,28 @@ namespace Radiant {
 
 	VulkanSwapchain::~VulkanSwapchain()
 	{
+		auto device = VulkanDevice::Get().Device();
 
+        CleanupSwapchain();
+        vkDestroySwapchainKHR(device, m_Swapchain, nullptr);
+		vkDestroySurfaceKHR(VulkanDevice::Get().Instance(), m_Surface, nullptr);
 	}
+
+    void VulkanSwapchain::CleanupSwapchain()
+    {
+        auto device = VulkanDevice::Get().Device();
+
+        for (auto imageView : m_ImageViews)
+        {
+            vkDestroyImageView(device, imageView, nullptr);
+        }
+
+        vkDestroyImageView(device, m_DepthImageView, nullptr);
+        vmaDestroyImage(VulkanDevice::Get().Allocator(), m_DepthImage, m_DepthAllocation);
+
+        //vkDestroySwapchainKHR(device, m_OldSwapchain, nullptr);
+        //m_OldSwapchain = m_Swapchain;
+    }
 
     void VulkanSwapchain::CreateSwapchain()
     {

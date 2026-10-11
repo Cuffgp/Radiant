@@ -1,12 +1,24 @@
 #include <Radiant.h>
 
-int main ()
+#include "EntryPoint.h"
+
+class SandboxApp : public Radiant::Application
 {
-	auto App = new Radiant::Application();
+public:
+	SandboxApp()
+	{
 
-	App->Run();
+	}
 
-	delete App;
+	~SandboxApp()
+	{
 
+	}
+private:
 
+};
+
+Radiant::Application* Radiant::CreateApplication()
+{
+	return new SandboxApp();
 }

@@ -26,4 +26,6 @@ namespace Radiant {
 
 	};
 
+	Application* CreateApplication();
+
 }

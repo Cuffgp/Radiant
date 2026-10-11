@@ -18,6 +18,7 @@ namespace Radiant {
 
 		VkPipelineLayout m_PipelineLayout;
 		VkPipeline m_Pipeline;
+		VkShaderModule m_ShaderModule;
 
 	};
 

@@ -27,6 +27,8 @@ namespace Radiant {
 		void CreateSwapchain();
 		void CreateImages();
 
+		void CleanupSwapchain();
+
 	private:
 		VkSurfaceKHR m_Surface;
 		VkSwapchainKHR m_Swapchain;

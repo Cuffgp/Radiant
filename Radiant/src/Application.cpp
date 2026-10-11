@@ -1,6 +1,8 @@
 
 #include "Application.h"
 
+#include <filesystem>
+
 namespace Radiant {
 
 	Application::Application()
@@ -8,15 +10,15 @@ namespace Radiant {
 		s_Application = this;
 
 		m_Window = CreateScope<Window>();
-		VulkanDevice::Init();
 		m_Renderer = CreateScope<VulkanRenderer>();
 		m_Pipeline = CreateScope<VulkanPipeline>("Path");
+
+		std::println("Current Path: {}", std::filesystem::current_path().string());
 	}
 
 	Application::~Application()
 	{
-		m_Renderer = 0;
-		VulkanDevice::Destroy();
+		vkDeviceWaitIdle(VulkanDevice::Get().Device());
 	}
 
 	void Application::Run()

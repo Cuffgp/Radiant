@@ -37,8 +37,9 @@ namespace Radiant {
 	{
 		auto device = VulkanDevice::Get().Device();
 
-		//vkDestroyPipeline(device, m_Pipeline, nullptr);
-		//vkDestroyPipelineLayout(device, m_PipelineLayout, nullptr);
+		vkDestroyShaderModule(device, m_ShaderModule, nullptr);
+		vkDestroyPipeline(device, m_Pipeline, nullptr);
+		vkDestroyPipelineLayout(device, m_PipelineLayout, nullptr);
 	}
 
 	void VulkanPipeline::CreatePipelineLayout()
@@ -66,15 +67,14 @@ namespace Radiant {
 
 		// Load shader
 
-		auto shaderCode = readFile("C:/dev/Raidant/Sandbox/assets/simple_shader.spv");
+		auto shaderCode = readFile("assets/simple_shader.spv");
 
 		VkShaderModuleCreateInfo createInfo{};
 		createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
 		createInfo.codeSize = shaderCode.size();
 		createInfo.pCode = reinterpret_cast<const uint32_t*>(shaderCode.data());
 
-		VkShaderModule shaderModule;
-		if (vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) 
+		if (vkCreateShaderModule(device, &createInfo, nullptr, &m_ShaderModule) != VK_SUCCESS) 
 		{
 			std::println("Failed to create shader module!");
 		}
@@ -83,7 +83,7 @@ namespace Radiant {
 		{
 			.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,
 			.stage = VK_SHADER_STAGE_VERTEX_BIT,
-			.module = shaderModule,
+			.module = m_ShaderModule,
 			.pName = "vertMain"
 		};
 
@@ -91,7 +91,7 @@ namespace Radiant {
 		{
 			.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,
 			.stage = VK_SHADER_STAGE_FRAGMENT_BIT,
-			.module = shaderModule,
+			.module = m_ShaderModule,
 			.pName = "fragMain"
 		};
 
