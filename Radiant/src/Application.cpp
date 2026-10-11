@@ -2,6 +2,7 @@
 #include "Application.h"
 
 #include <filesystem>
+#include "hlsl++.h"
 
 namespace Radiant {
 
@@ -16,6 +17,7 @@ namespace Radiant {
 		m_Pipeline = CreateScope<VulkanPipeline>("assets/simple_shader.spv");
 
 		std::println("Current Path: {}", std::filesystem::current_path().string());
+
 	}
 
 	Application::~Application()

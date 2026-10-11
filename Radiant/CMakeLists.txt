@@ -1,5 +1,9 @@
 # Radiant
 
+if(WIN32)
+    add_compile_definitions(NOMINMAX)
+endif()
+
 # GLFW
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
@@ -49,4 +53,5 @@ target_include_directories(Radiant
 		vendor/glfw-3.4/include
 		vendor/volk-1.4.350
 		vendor/VulkanMemoryAllocator-3.4.0/include
+		vendor/hlslpp-3.9/include
 )
